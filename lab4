@@ -1,0 +1,85 @@
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       VEX                                                       */
+/*    Created:      Tue Mar 16 2021                                           */
+/*    Description:  Arm Manual Movement                                       */
+/*                                                                            */
+/*    This example will continuously display the current                      */
+/*    position of the arm on the V5 Brain's screen and allow you              */
+/*    to manually move the arm around                                         */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// RoboticArm1          RoboticArm    1, 2, 3, 4, A, B, C, D
+// EStop                bumper        E              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+
+#include "vex.h"
+
+
+using namespace vex;
+
+
+// function to run when the emergency stop button is pressed
+void onEStopPressed() {
+ RoboticArm1.emergencyStop();
+}
+
+
+int main() {
+ // Initializing Robot Configuration. DO NOT REMOVE!
+ vexcodeInit();
+
+
+   // register emergency stop event handler
+ EStop.pressed(onEStopPressed);
+
+
+ // short wait to make sure the emergency stop event is fully registered
+ wait(15, msec);
+
+
+ RoboticArm1.setMasteringValues(1778, 2118, 1993, 572);
+ RoboticArm1.setToolTipOffset(0, 0, 0);
+  RoboticArm1.moveToPositionLinear(6, 4, 2.45);
+ RoboticArm1.moveToPositionJoint(5.98, -1.5, 2.45);
+ RoboticArm1.moveToPositionLinear(6.8, -4, 2.45);
+ RoboticArm1.enableManualMovement();
+
+
+
+
+ // display the position on the screen constantly
+ Brain.Screen.setFont(mono60);
+  while (true) {
+   Brain.Screen.clearScreen();
+
+
+   // Display the X position on row 1
+   Brain.Screen.setCursor(1, 1);
+   Brain.Screen.print("Arm X: %0.3f", RoboticArm1.getAxisPosition(xaxis));
+
+
+   // Display the Y position on row 2
+   Brain.Screen.newLine();
+   Brain.Screen.print("Arm Y: %0.3f", RoboticArm1.getAxisPosition(yaxis));
+
+
+   // Display the Z position on row 3
+   Brain.Screen.newLine();
+   Brain.Screen.print("Arm Z: %0.3f", RoboticArm1.getAxisPosition(zaxis));
+
+
+   wait(0.2, seconds);
+ }
+ 
+}
+
+
+
