@@ -1,0 +1,109 @@
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       VEX                                                       */
+/*    Created:      Tue Mar 16 2021                                           */
+/*    Description:  Arm Display Position                                      */
+/*                                                                            */
+/*    This example will continuously display the current                      */
+/*    position of the arm on the brain's screen                               */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// RoboticArm1          RoboticArm    1, 2, 3, 4, 1, 2, 3, 4
+// EStop                bumper        E              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+
+#include "vex.h"
+
+
+using namespace vex;
+
+
+int displayPositionLoop() {
+
+
+ Brain.Screen.setFont(mono60);
+  while (true) {
+   Brain.Screen.clearScreen();
+
+
+   // Display the X position on row 1
+   Brain.Screen.setCursor(1, 1);
+   Brain.Screen.print("X: %.3f", RoboticArm1.getAxisPosition(xaxis));
+
+
+   // Display the Y position on row 2
+   Brain.Screen.newLine();
+   Brain.Screen.print("Y: %.3f", RoboticArm1.getAxisPosition(yaxis));
+
+
+   // Display the Z position on row 3
+   Brain.Screen.newLine();
+   Brain.Screen.print("Z: %.3f", RoboticArm1.getAxisPosition(zaxis));
+
+
+   wait(0.2, seconds);
+ }
+ return 0;
+}
+
+
+// This is the function we want to run when the emergency stop button
+// is pressed. It will tell the arm to stop moving.
+void onEStopPressed() {
+ RoboticArm1.emergencyStop();
+}
+
+
+int main() {
+ // Initializing Robot Configuration. DO NOT REMOVE!
+ vexcodeInit();
+  // Link the emergency stop button pressed event with the onEStopPressed function
+ EStop.pressed(onEStopPressed);
+
+
+ int startX = 9;
+ int startY = 0;
+ int startZ = 3;
+ // Start task to continuously display the current arm position
+ vex::task displayPositionTask(displayPositionLoop);
+
+
+ // Set up the arm with the initial configuration values
+ RoboticArm1.setMasteringValues(1790, 2134, 1864, 552);
+ RoboticArm1.setToolTipOffset(0.0, 0.0, 0.0);
+
+
+ RoboticArm1.moveToPositionLinear(startX, startY, startZ);
+ RoboticArm1.moveToPositionLinear(startX, 3 , startZ);
+
+
+ RoboticArm1.moveToPositionLinear(7, 3, startZ);
+
+
+ RoboticArm1.moveToPositionLinear(7, 0, startZ);
+
+
+ RoboticArm1.moveToPositionLinear(startX, startY, startZ);
+
+
+ RoboticArm1.moveToPositionLinear(5,0,startZ);
+  RoboticArm1.moveToPositionLinear(5, -2, startZ);
+
+
+ RoboticArm1.moveToPositionLinear(7, -2, startZ);
+
+
+ RoboticArm1.moveToPositionLinear(7, 1, startZ);
+
+
+}
+
+
+
