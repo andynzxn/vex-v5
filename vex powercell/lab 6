@@ -1,0 +1,77 @@
+/*----------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// RoboticArm1          RoboticArm    1, 2, 3, 4, A, B, C, D
+// BumperE              bumper        E              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+
+
+
+#include "vex.h"
+
+
+float zvalue = 2;
+
+
+
+
+
+
+
+
+using namespace vex;
+
+
+//RoboticArm1.moveToPositionLinear(xvalue,yvalue,zvalue);
+void triangle1(){
+RoboticArm1.moveToPositionLinear(5,-4,zvalue);
+RoboticArm1.moveToPositionLinear(9,-3,zvalue);
+RoboticArm1.moveToPositionLinear(5,-2,zvalue);
+RoboticArm1.moveToPositionLinear(5,-2,zvalue+1);
+
+
+}
+
+
+void triangle2(){
+RoboticArm1.moveToPositionLinear(5,2,zvalue);
+RoboticArm1.moveToPositionLinear(9,3,zvalue);
+RoboticArm1.moveToPositionLinear(5,4,zvalue);
+RoboticArm1.moveToPositionLinear(5,4,zvalue+1);
+}
+
+
+void onEStopPressed() {
+  RoboticArm1.emergencyStop();
+
+
+}
+
+
+
+
+int main() {
+// Initializing Robot Configuration. DO NOT REMOVE!
+vexcodeInit();
+RoboticArm1.setMasteringValues(1729, 2150, 1899, 597);
+//RoboticArm1.setToolTipOffset(1.05, 0.0, -1.0);
+RoboticArm1.setToolTipOffset(0,0,0);
+triangle1();
+triangle2();
+Estop.pressed(onEStopPressed);
+return 0;
+}
+
+
+x`
+
