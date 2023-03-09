@@ -1,0 +1,38 @@
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       C:\Users\99742358                                         */
+/*    Created:      Mon Sep 12 2022                                           */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// frontDistance        sonar         C, D           
+// Drivetrain           drivetrain    1, 10          
+// rearBumper           bumper        A              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+
+#include "vex.h"
+
+
+using namespace vex;
+
+
+int main() {
+ // Initializing Robot Configuration. DO NOT REMOVE!
+ vexcodeInit();
+
+
+ for(int i=0; i<4; i++){
+   Drivetrain.drive(forward);
+   waitUntil(frontDistance.distance(mm) < 300);
+     Drivetrain.driveFor(reverse, 300, mm, 30, velocityUnits::pct);
+     Drivetrain.turnFor(right, 90 , degrees);
+     wait(2, seconds);
+ }
+ }
