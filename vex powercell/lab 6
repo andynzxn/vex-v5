@@ -11,7 +11,7 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // RoboticArm1          RoboticArm    1, 2, 3, 4, A, B, C, D
-// BumperE              bumper        E              
+// BumperE              bumper        E             
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 
@@ -32,9 +32,10 @@ float zvalue = 2;
 using namespace vex;
 
 
-//RoboticArm1.moveToPositionLinear(xvalue,yvalue,zvalue);
-void triangle1(){
-RoboticArm1.moveToPositionLinear(5,-4,zvalue);
+
+
+void letterV(){
+RoboticArm1.moveToPositionLinear(5,-4.18,zvalue);
 RoboticArm1.moveToPositionLinear(9,-3,zvalue);
 RoboticArm1.moveToPositionLinear(5,-2,zvalue);
 RoboticArm1.moveToPositionLinear(5,-2,zvalue+1);
@@ -43,18 +44,55 @@ RoboticArm1.moveToPositionLinear(5,-2,zvalue+1);
 }
 
 
-void triangle2(){
-RoboticArm1.moveToPositionLinear(5,2,zvalue);
-RoboticArm1.moveToPositionLinear(9,3,zvalue);
-RoboticArm1.moveToPositionLinear(5,4,zvalue);
-RoboticArm1.moveToPositionLinear(5,4,zvalue+1);
+void letterE(){
+RoboticArm1.moveToPositionLinear(5,-1,zvalue+1);
+RoboticArm1.moveToPositionLinear(5,-1,zvalue);
+RoboticArm1.moveToPositionLinear(9,-1,zvalue);
+RoboticArm1.moveToPositionLinear(9,-1,zvalue+1);
+
+
+
+
+RoboticArm1.moveToPositionLinear(5,-1.5,zvalue+1);
+RoboticArm1.moveToPositionLinear(5,-1.5,zvalue);
+RoboticArm1.moveToPositionLinear(5,1,zvalue);
+RoboticArm1.moveToPositionLinear(5,1,zvalue+1);
+
+
+
+
+RoboticArm1.moveToPositionLinear(7.3,-1,zvalue+1);
+RoboticArm1.moveToPositionLinear(7.3,-1.5,zvalue);
+RoboticArm1.moveToPositionLinear(7.3,1,zvalue);
+RoboticArm1.moveToPositionLinear(7.3,1,zvalue+1);
+
+
+
+
+RoboticArm1.moveToPositionLinear(9,-1,zvalue+1);
+RoboticArm1.moveToPositionLinear(9,-1,zvalue);
+RoboticArm1.moveToPositionLinear(9,1,zvalue);
+RoboticArm1.moveToPositionLinear(9,1,zvalue+1);
+
+
+
+
+
+
+
+
 }
 
 
-void onEStopPressed() {
-  RoboticArm1.emergencyStop();
-
-
+void letterX(){
+RoboticArm1.moveToPositionLinear(5,2,zvalue+1);
+RoboticArm1.moveToPositionLinear(5,2,zvalue);
+RoboticArm1.moveToPositionLinear(9,4,zvalue);
+RoboticArm1.moveToPositionLinear(9,4,zvalue+1);
+RoboticArm1.moveToPositionLinear(9,2,zvalue+1);
+RoboticArm1.moveToPositionLinear(9,2,zvalue);
+RoboticArm1.moveToPositionLinear(5,4,zvalue);
+RoboticArm1.moveToPositionLinear(5,4,zvalue+1);
 }
 
 
@@ -66,12 +104,11 @@ vexcodeInit();
 RoboticArm1.setMasteringValues(1729, 2150, 1899, 597);
 //RoboticArm1.setToolTipOffset(1.05, 0.0, -1.0);
 RoboticArm1.setToolTipOffset(0,0,0);
-triangle1();
-triangle2();
-Estop.pressed(onEStopPressed);
+letterV();
+letterE();
+letterX();
 return 0;
 }
 
 
-x`
 
